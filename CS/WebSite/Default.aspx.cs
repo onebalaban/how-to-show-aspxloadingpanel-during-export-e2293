@@ -30,11 +30,11 @@ public partial class _Default : System.Web.UI.Page {
     protected void bnExport_Click(object sender, EventArgs e) {
         ASPxButton btn = sender as ASPxButton;
 
-        PrintingSystem ps = new PrintingSystem();
-        PrintableComponentLink lnk = new PrintableComponentLink(ps);
+        PrintingSystemBase ps = new PrintingSystemBase();
+        PrintableComponentLinkBase lnk = new PrintableComponentLinkBase(ps);
         lnk.Component = gridExporter;
 
-        CompositeLink compositeLink = new CompositeLink(ps);
+        CompositeLinkBase compositeLink = new CompositeLinkBase(ps);
         compositeLink.Links.AddRange(new object[] { lnk });
         compositeLink.CreateDocument();
 
@@ -42,15 +42,15 @@ public partial class _Default : System.Web.UI.Page {
         string type = string.Empty;
         switch(btn.ID) {
             case "bnExportPDF":
-                compositeLink.PrintingSystem.ExportToPdf(stream);
+                compositeLink.PrintingSystemBase.ExportToPdf(stream);
                 type = "pdf";
                 break;
             case "bnExportXLS":
-                compositeLink.PrintingSystem.ExportToXls(stream);
+                compositeLink.PrintingSystemBase.ExportToXls(stream);
                 type = "xls";
                 break;
             case "bnExportRRF":
-                compositeLink.PrintingSystem.ExportToRtf(stream);
+                compositeLink.PrintingSystemBase.ExportToRtf(stream);
                 type = "rtf";
                 break;
         }
