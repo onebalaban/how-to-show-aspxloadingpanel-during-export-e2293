@@ -41,26 +41,26 @@ Partial Public Class _Default
 	Protected Sub bnExport_Click(ByVal sender As Object, ByVal e As EventArgs)
 		Dim btn As ASPxButton = TryCast(sender, ASPxButton)
 
-		Dim ps As New PrintingSystem()
-		Dim lnk As New PrintableComponentLink(ps)
-		lnk.Component = gridExporter
+        Dim ps As New PrintingSystemBase()
+        Dim lnk As New PrintableComponentLinkBase(ps)
+        lnk.Component = gridExporter
 
-		Dim compositeLink As New CompositeLink(ps)
-		compositeLink.Links.AddRange(New Object() { lnk })
+        Dim compositeLink As New CompositeLinkBase(ps)
+        compositeLink.Links.AddRange(New Object() { lnk })
 		compositeLink.CreateDocument()
 
 		Dim stream As New MemoryStream()
 		Dim type As String = String.Empty
 		Select Case btn.ID
 			Case "bnExportPDF"
-				compositeLink.PrintingSystem.ExportToPdf(stream)
-				type = "pdf"
+                compositeLink.PrintingSystemBase.ExportToPdf(stream)
+                type = "pdf"
 			Case "bnExportXLS"
-				compositeLink.PrintingSystem.ExportToXls(stream)
-				type = "xls"
+                compositeLink.PrintingSystemBase.ExportToXls(stream)
+                type = "xls"
 			Case "bnExportRRF"
-				compositeLink.PrintingSystem.ExportToRtf(stream)
-				type = "rtf"
+                compositeLink.PrintingSystemBase.ExportToRtf(stream)
+                type = "rtf"
 		End Select
 		Session("ExportStreame") = stream
 		Session("type") = type
