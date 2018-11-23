@@ -54,11 +54,11 @@ public partial class _Default : System.Web.UI.Page {
                 type = "rtf";
                 break;
         }
-        Session["ExportStreame"] = stream;
+        Session["ExportStream"] = stream;
         Session["type"] = type;
     }
     protected void btn_Click(object sender, EventArgs e) {
-        MemoryStream stream = Session["ExportStreame"] as MemoryStream;
+        MemoryStream stream = Session["ExportStream"] as MemoryStream;
         string type = Session["type"].ToString();
         WriteToResponse(grid.ID, true, type, stream);
     }
